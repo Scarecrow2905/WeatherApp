@@ -23,7 +23,9 @@ import { onMounted } from 'vue';
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={a1edbad8839196798fba35acf6d06891}')
+
+            // Check youtube for how the api request looked like!!
+            const response = await axios.get('')
             console.log(response.data) // Log for verification
         }
         catch (error){
