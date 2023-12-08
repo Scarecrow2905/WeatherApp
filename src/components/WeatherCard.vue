@@ -8,21 +8,21 @@
 			class="search-bar"
 			placeholder="Search.."
 			v-model="query"
-			@keypress.Enter="fetchData"
+			@keyup.Enter="fetchData"
 		/>
 	</div>
-	{{ query }}
+	{{}}
 
 	<!--Weather information goes here-->
 
-	<div class="weather-card" v-if="typeof query != 'undefined'">
+	<div class="weather-card">
 		<div class="location-box">
-			<div class="location">City: {{ weather.name }}</div>
-			<div class="date">Date: {{ weather.date }}</div>
+			<div class="location">City: {{}}</div>
+			<div class="date">Date: {{}}</div>
 		</div>
 
 		<div class="weather-box">
-			<div class="temp">Temp: {{ weather.temp }}</div>
+			<div class="temp">Temp: {{ weatherData.name }}</div>
 			<div class="weather">Weather: {{}}</div>
 		</div>
 	</div>
@@ -30,36 +30,23 @@
 
 <!--This is where the script logic and options goes-->
 <script lang="ts">
-import axios from "axios";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
+import { getWeatherData } from "@/services/weatherApiService";
 
 export default {
 	setup() {
 		const query = ref("");
-		const weather = ref<any>(null);
-
-		const apiUrl = "https://api.openweathermap.org/data/2.5/";
-		const apiKey = "a1edbad8839196798fba35acf6d06891";
+		const weatherData = ref<any>(null); // Ref means reactive reference
 
 		const fetchData = async () => {
 			try {
-				// Check youtube for how the api request looked like
-				const response = await axios.get(apiUrl + "weather", {
-					params: {
-						q: query.value,
-						appid: apiKey,
-					},
-				});
-				console.log(response.data); // Log for verification
+				weatherData.value = await getWeatherData(query.value);
 			} catch (error) {
-				console.error("Error fetching weather data", error);
+				console.error("Error in component: ", error);
 			}
 		};
 
-		// Fetch data when the component is mounted
-		onMounted(fetchData);
-
-		return { fetchData, apiKey, apiUrl, query, weather };
+		return { fetchData, query, weatherData };
 	},
 };
 </script>
