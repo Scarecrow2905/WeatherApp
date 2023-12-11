@@ -41,8 +41,8 @@ export default {
 
 		const fetchData = async () => {
 			try {
-				console.log("Running fetchData()..", weatherData.value);
 				weatherData.value = await getWeatherData(query.value);
+				console.log("Running fetchData()..", weatherData.value);
 			} catch (error) {
 				console.error("Error in component: ", error);
 			}

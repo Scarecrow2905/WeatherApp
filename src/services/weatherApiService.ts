@@ -9,6 +9,7 @@ export const getWeatherData = async (query: string) => {
 			params: {
 				q: query,
 				appid: apiKey,
+				units: "metric", // Needed the " ", used to be measured in Kelvin instead of Celcius
 			},
 		});
 		return response.data;
