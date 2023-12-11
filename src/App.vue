@@ -3,7 +3,7 @@
 <template>
 	<header>
 		<div id="app">
-			<WeatherCard msg="Weather app works!" />
+			<WeatherCard />
 		</div>
 	</header>
 </template>

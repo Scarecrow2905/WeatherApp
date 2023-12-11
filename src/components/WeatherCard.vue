@@ -8,22 +8,23 @@
 			class="search-bar"
 			placeholder="Search.."
 			v-model="query"
-			@keyup.Enter="fetchData"
+			@keypress.enter="fetchData"
 		/>
 	</div>
-	{{}}
 
 	<!--Weather information goes here-->
 
-	<div class="weather-card">
+	<div class="weather-card" v-if="typeof weatherData && weatherData.main">
 		<div class="location-box">
-			<div class="location">City: {{}}</div>
+			<div class="location">
+				City: {{ weatherData.name }}, {{ weatherData.sys.country }}
+			</div>
 			<div class="date">Date: {{}}</div>
 		</div>
 
 		<div class="weather-box">
-			<div class="temp">Temp: {{ weatherData.name }}</div>
-			<div class="weather">Weather: {{}}</div>
+			<div class="temp">Temp: {{ weatherData.main.temp }}</div>
+			<div class="weather">Weather: {{ weatherData.weather[0].main }}</div>
 		</div>
 	</div>
 </template>
@@ -36,10 +37,11 @@ import { getWeatherData } from "@/services/weatherApiService";
 export default {
 	setup() {
 		const query = ref("");
-		const weatherData = ref<any>(null); // Ref means reactive reference
+		const weatherData = ref<any>({}); // Ref means reactive reference
 
 		const fetchData = async () => {
 			try {
+				console.log("Running fetchData()..", weatherData.value);
 				weatherData.value = await getWeatherData(query.value);
 			} catch (error) {
 				console.error("Error in component: ", error);
