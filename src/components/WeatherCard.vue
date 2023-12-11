@@ -4,7 +4,7 @@
 <template>
 	<div id="app">
 		<main>
-			<div class="searh-box">
+			<div class="search-box">
 				<input
 					type="text"
 					class="search-bar"
@@ -148,7 +148,7 @@ main {
 
 	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
 	background-color: rgba(0, 250, 241, 0.5);
-	border-radius: 0px 16px 0px 16px;
+	border-radius: 16px 16px 16px 16px;
 	transition: 0.4s;
 }
 
@@ -182,7 +182,7 @@ main {
 	display: inline-block;
 	padding: 10px 25px;
 	color: #fff;
-	font-size: 102px;
+	font-size: 50px;
 	font-weight: 900;
 
 	text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
